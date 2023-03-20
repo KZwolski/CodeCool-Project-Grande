@@ -217,7 +217,21 @@ export default function EventPage() {
                             <EventChat eventId={event.eventId}/>
                                 :<p>You must be logged In to join chat</p>}
                         </div>
+
+                        <div className="kodfun-galeri">
+                            <div className="background-image"><img src={imageUrl} width="80%" alt="zdj"/></div>
+                            <div className="background-image"><img src={imageUrl} width="80%" alt="zdj"/></div>
+                            <div className="background-image"><img src={imageUrl} width="80%" alt="zdj"/></div>
+                            <div className="background-image"><img src={imageUrl} width="80%" alt="zdj"/></div>
+                            <div className="background-image"><img src={imageUrl} width="80%"/></div>
+                        </div>
+                        {/*<div>*/}
+                        {/*    <img src={imageUrl} width="80%"/>*/}
+                        {/*</div>*/}
+
+
                     </div>
                 </div>
+
             </>)
 }

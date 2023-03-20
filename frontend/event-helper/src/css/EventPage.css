@@ -155,3 +155,28 @@
     width: 5%;
     float: right;
 }
+
+.kodfun-galeri {
+    display: flex;
+    height: 20rem;
+    gap: 1rem
+}
+.kodfun-galeri > div {
+    flex: 1;
+    border-radius: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    transition: all .8s cubic-bezier(.25, .4, .45, 1.4);
+}
+.kodfun-galeri > div:hover {
+    flex: 5;
+}
+body {
+    background-color: #F0B86C;
+    max-width: 900px;
+    margin: 1rem auto;
+}
+
+
+
