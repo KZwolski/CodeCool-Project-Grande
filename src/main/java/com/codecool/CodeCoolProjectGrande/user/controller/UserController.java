@@ -2,6 +2,7 @@ package com.codecool.CodeCoolProjectGrande.user.controller;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
 
+import com.codecool.CodeCoolProjectGrande.user.service.UserService;
 import com.codecool.CodeCoolProjectGrande.user.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,12 @@ import java.util.Optional;
 @RequestMapping("/api/")
 public class UserController {
     private final UserServiceImpl userService;
+    private final UserService userServicev2;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserServiceImpl userService, UserService userServicev2) {
         this.userService = userService;
+        this.userServicev2 = userServicev2;
     }
 
     @CrossOrigin

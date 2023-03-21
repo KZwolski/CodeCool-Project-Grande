@@ -19,12 +19,10 @@ public interface UserService {
     List<User> getUsers();
 
 
-    ResponseCookie authenticateUser(LoginRequest loginRequest);
-    ResponseCookie logoutUser();
     Optional<User> createUser(User user);
     boolean isUserDataValid(User user);
 
-    void deleteUser(String userEmail);
+    Optional<User> deleteUser(String userEmail);
 
 
 }

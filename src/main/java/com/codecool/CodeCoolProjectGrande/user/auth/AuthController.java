@@ -5,6 +5,7 @@ import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Excep
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Response;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Utils;
 import com.codecool.CodeCoolProjectGrande.user.jwt.JwtUtils;
+import com.codecool.CodeCoolProjectGrande.user.repository.UserDetailsImpl;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
 import org.jetbrains.annotations.NotNull;
@@ -64,13 +65,20 @@ public class AuthController {
         } catch (ReCAPTCHAv3Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-
     }
+
+    public ResponseCookie authenticateUser(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        return jwtUtils.generateJwtCookie(userDetails);
+    }
+
 
     @NotNull
     private ResponseEntity<ResponseCookie> loginUser(LoginRequest loginRequest) {
-        ResponseCookie jwtCookie = userService.authenticateUser(loginRequest);
+        ResponseCookie jwtCookie = authenticateUser(loginRequest);
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(jwtCookie);
     }
@@ -80,7 +88,7 @@ public class AuthController {
         if (!userRepository.findUserByEmail(loginRequest.getEmail()).isPresent()){
             userRepository.save(new User(loginRequest.getUsername(), encoder.encode(loginRequest.getPassword()), loginRequest.getEmail()));
         }
-        ResponseCookie jwtCookie = userService.authenticateUser(loginRequest);
+        ResponseCookie jwtCookie = authenticateUser(loginRequest);
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(jwtCookie);
     }
