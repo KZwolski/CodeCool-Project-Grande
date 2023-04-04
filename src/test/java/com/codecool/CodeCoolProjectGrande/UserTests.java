@@ -53,18 +53,9 @@ public class UserTests {
             .email("email@gmail.com")
             .password("test1")
             .userType(UserType.USER)
-            .banToken(initBanToken())
             .location("Warsaw")
             .resetPasswordToken(new ResetPasswordToken())
             .build();
-
-
-    public BanToken initBanToken(){
-        BanToken banToken = new BanToken();
-        banToken.setBanId(UUID.randomUUID());
-        banToken.setBanDays(5);
-        return banToken;
-    }
 
 //User service tests
 

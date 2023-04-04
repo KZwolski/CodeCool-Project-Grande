@@ -15,10 +15,7 @@ public interface UserService {
     Optional<User> getUserByEmail(String email);
     Optional<User> saveUser(User user);
     Optional<User> getUserByToken(UUID token);
-
     List<User> getUsers();
-
-
     ResponseCookie authenticateUser(LoginRequest loginRequest);
     ResponseCookie logoutUser();
     Optional<User> createUser(User user);

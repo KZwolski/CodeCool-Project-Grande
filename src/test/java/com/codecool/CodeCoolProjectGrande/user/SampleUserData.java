@@ -14,7 +14,6 @@ public class SampleUserData {
                 .email("maciek22@gmail.com")
                 .password("Maciek231")
                 .userType(UserType.USER)
-                .banToken(initBanToken())
                 .location("Warsaw")
                 .resetPasswordToken(new ResetPasswordToken())
                 .build();
@@ -27,17 +26,9 @@ public class SampleUserData {
                 .email("tomek34@x")
                 .password("tomek")
                 .userType(UserType.USER)
-                .banToken(initBanToken())
                 .location("Krakow")
                 .resetPasswordToken(new ResetPasswordToken())
                 .build();
-    }
-
-    public static BanToken initBanToken(){
-        BanToken banToken = new BanToken();
-        banToken.setBanId(UUID.randomUUID());
-        banToken.setBanDays(5);
-        return banToken;
     }
 
 }
