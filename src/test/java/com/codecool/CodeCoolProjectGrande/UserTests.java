@@ -1,10 +1,8 @@
 package com.codecool.CodeCoolProjectGrande;
 
 
-import com.codecool.CodeCoolProjectGrande.user.BanToken;
 import com.codecool.CodeCoolProjectGrande.user.User;
 import com.codecool.CodeCoolProjectGrande.user.UserType;
-import com.codecool.CodeCoolProjectGrande.user.configuration.EmailValidator;
 import com.codecool.CodeCoolProjectGrande.user.password_reset.PasswordController;
 import com.codecool.CodeCoolProjectGrande.user.password_reset.PasswordServiceImpl;
 import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
