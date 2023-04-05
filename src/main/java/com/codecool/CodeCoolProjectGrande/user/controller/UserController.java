@@ -15,7 +15,7 @@ import java.util.Optional;
 @Controller
 @ResponseBody
 @CrossOrigin
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class UserController {
     private final UserServiceImpl userService;
 
@@ -24,24 +24,34 @@ public class UserController {
         this.userService = userService;
     }
 
-    @CrossOrigin
-    @GetMapping("users")
+    @GetMapping("/users")
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
-    @GetMapping("user/{userEmail}")
+    @GetMapping("/user/{userEmail}")
     public Optional<User> getUserByEmail(@PathVariable String userEmail) {
         return userService.getUserByEmail(userEmail);
     }
 
-    @PostMapping("user")
+    @PostMapping("/user")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>("User added", HttpStatus.OK);
     }
 
-    @DeleteMapping("delete-account/{userEmail}")
+
+    @PostMapping("/registration")
+    public ResponseEntity<?> registerAccount(@RequestBody User user){
+        if (userService.isUserDataValid(user)){
+            userService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+
+    @DeleteMapping("/delete-account/{userEmail}")
     public void deleteUser(@PathVariable String userEmail) {
         userService.deleteUser(userEmail);
     }
