@@ -1,6 +1,7 @@
-package com.codecool.CodeCoolProjectGrande.user.auth;
+package com.codecool.CodeCoolProjectGrande.user.controller;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
+import com.codecool.CodeCoolProjectGrande.user.auth.LoginRequest;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Exception;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Response;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Utils;
