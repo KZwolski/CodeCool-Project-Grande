@@ -1,6 +1,6 @@
 package com.codecool.CodeCoolProjectGrande.user.password_reset;
 
-import com.codecool.CodeCoolProjectGrande.user.config.EmailValidator;
+import com.codecool.CodeCoolProjectGrande.user.util.EmailValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

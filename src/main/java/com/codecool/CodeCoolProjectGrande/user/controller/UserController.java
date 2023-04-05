@@ -40,7 +40,6 @@ public class UserController {
         return new ResponseEntity<>("User added", HttpStatus.OK);
     }
 
-
     @PostMapping("/registration")
     public ResponseEntity<?> registerAccount(@RequestBody User user){
         if (userService.isUserDataValid(user)){

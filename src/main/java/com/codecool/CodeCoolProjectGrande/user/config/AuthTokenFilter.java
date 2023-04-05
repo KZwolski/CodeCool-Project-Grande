@@ -1,5 +1,6 @@
-package com.codecool.CodeCoolProjectGrande.user.auth.jwt;
+package com.codecool.CodeCoolProjectGrande.user.config;
 
+import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
 
     @Autowired
-    private JwtUtils jwtUtils;
+    private JwtService jwtService;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -33,8 +34,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-                String username = jwtUtils.getUserNameFromJwtToken(jwt);
+            if (jwt != null && jwtService.validateJwtToken(jwt)) {
+                String username = jwtService.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
@@ -56,7 +57,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     }
 
     private String parseJwt(HttpServletRequest request) {
-        String jwt = jwtUtils.getJwtFromCookies(request);
+        String jwt = jwtService.getJwtFromCookies(request);
         return jwt;
     }
 }

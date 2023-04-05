@@ -3,8 +3,8 @@ package com.codecool.CodeCoolProjectGrande;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
 import com.codecool.CodeCoolProjectGrande.user.UserType;
-import com.codecool.CodeCoolProjectGrande.user.password_reset.PasswordController;
-import com.codecool.CodeCoolProjectGrande.user.password_reset.PasswordServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.controller.ResetPasswordController;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.ResetPasswordServiceImpl;
 import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
@@ -39,10 +39,10 @@ public class UserTests {
     private UserServiceImpl userService;
 
     @Autowired
-    private PasswordController passwordController;
+    private ResetPasswordController resetPasswordController;
 
     @Autowired
-    private PasswordServiceImpl passwordService;
+    private ResetPasswordServiceImpl passwordService;
 
 
 
@@ -115,14 +115,14 @@ public class UserTests {
     @Test
     public void forgotPasswordPathTest() {
         when(userService.getUserByEmail(user.getEmail())).thenReturn(Optional.of(user));
-        Assertions.assertEquals(passwordController.forgotPassword(user.getEmail()), new ResponseEntity<>(HttpStatus.OK));
+        Assertions.assertEquals(resetPasswordController.forgotPassword(user.getEmail()), new ResponseEntity<>(HttpStatus.OK));
     }
 
     @Test
     public void setNewPasswordPathTest() throws JsonProcessingException {
         String mockPassword = "test";
         when(userService.getUserByToken(user.getResetPasswordToken().getTokenId())).thenReturn(Optional.of(user));
-        Assertions.assertEquals(passwordController.setNewPassword(user.getResetPasswordToken().getTokenId(), mockPassword), new ResponseEntity<>(HttpStatus.OK));
+        Assertions.assertEquals(resetPasswordController.setNewPassword(user.getResetPasswordToken().getTokenId(), mockPassword), new ResponseEntity<>(HttpStatus.OK));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class UserTests {
         resetPasswordToken.isExpired();
         user.setResetPasswordToken(resetPasswordToken);
         when(userService.getUserByToken(user.getResetPasswordToken().getTokenId())).thenReturn(Optional.of(user));
-        Assertions.assertEquals(passwordController.setNewPassword(user.getResetPasswordToken().getTokenId(), "password"), new ResponseEntity<>(HttpStatus.GONE));
+        Assertions.assertEquals(resetPasswordController.setNewPassword(user.getResetPasswordToken().getTokenId(), "password"), new ResponseEntity<>(HttpStatus.GONE));
     }
 
 }

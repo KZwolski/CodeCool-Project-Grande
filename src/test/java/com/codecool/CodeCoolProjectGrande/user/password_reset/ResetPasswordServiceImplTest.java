@@ -2,6 +2,7 @@ package com.codecool.CodeCoolProjectGrande.user.password_reset;
 
 import com.codecool.CodeCoolProjectGrande.user.SampleUserData;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.ResetPasswordServiceImpl;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +20,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class PasswordServiceImplTest {
+class ResetPasswordServiceImplTest {
 
     @MockBean
     private UserRepository userRepository;
@@ -28,7 +29,7 @@ class PasswordServiceImplTest {
     private UserServiceImpl userService;
 
     @Autowired
-    private PasswordServiceImpl passwordService;
+    private ResetPasswordServiceImpl passwordService;
 
     @Test
     public void setPasswordTokenWhenEmailExist(){

@@ -1,8 +1,9 @@
 package com.codecool.CodeCoolProjectGrande.user.config;
 
-import com.codecool.CodeCoolProjectGrande.user.auth.jwt.AuthTokenFilter;
-import com.codecool.CodeCoolProjectGrande.user.auth.jwt.JwtUtils;
+import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.JwtServiceImpl;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserDetailsServiceImpl;
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -80,8 +81,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtUtils jwtUtils() {
-        return new JwtUtils();
+    public JwtService jwtUtils() {
+        return new JwtServiceImpl();
     }
 
     @Bean

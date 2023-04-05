@@ -1,14 +1,17 @@
-package com.codecool.CodeCoolProjectGrande.user.password_reset;
+package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.config.SecurityConfig;
-import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.controller.ResetPasswordController;
+import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.service.ResetPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -18,20 +21,22 @@ import java.util.UUID;
 
 
 @Service
-public class PasswordServiceImpl {
-    private final ResetPasswordRepository resetPasswordRepository;
-    private UserServiceImpl userService;
-    private EmailService emailService;
-    private final SecurityConfig securityConfig;
-    private static final Logger logger = LoggerFactory.getLogger(PasswordController.class);
+public class ResetPasswordServiceImpl implements ResetPasswordService {
+    private final UserServiceImpl userService;
+    private final PasswordEncoder passwordEncoder;
+    private final JavaMailSender mailSender;
+    private static final Logger logger = LoggerFactory.getLogger(ResetPasswordController.class);
 
 
     @Autowired
-    public PasswordServiceImpl(ResetPasswordRepository resetPasswordRepository, UserServiceImpl userService, EmailService emailService, SecurityConfig securityConfig) {
-        this.resetPasswordRepository = resetPasswordRepository;
+    public ResetPasswordServiceImpl(UserServiceImpl userService, PasswordEncoder passwordEncoder, JavaMailSender mailSender) {
         this.userService = userService;
-        this.emailService = emailService;
-        this.securityConfig = securityConfig;
+        this.passwordEncoder = passwordEncoder;
+        this.mailSender = mailSender;
+    }
+
+    public void sendEmail(SimpleMailMessage email) {
+        mailSender.send(email);
     }
 
     public ResponseEntity<?> forgotPassword(String userEmail) {
@@ -44,7 +49,7 @@ public class PasswordServiceImpl {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    private void sendResetPasswordEmail(User user, ResetPasswordToken token) {
+    public void sendResetPasswordEmail(User user, ResetPasswordToken token) {
         SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
         String appUrl = "http://localhost:3000";
         passwordResetEmail.setFrom("support@demo.com");
@@ -52,10 +57,10 @@ public class PasswordServiceImpl {
         passwordResetEmail.setSubject("Password Reset Request");
         passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
                 + "/reset-password/" + token.getTokenId());
-        emailService.sendEmail(passwordResetEmail);
+        sendEmail(passwordResetEmail);
     }
 
-    private ResetPasswordToken setResetPasswordToken(User user) {
+    public ResetPasswordToken setResetPasswordToken(User user) {
         ResetPasswordToken token = new ResetPasswordToken();
         user.setResetPasswordToken(token);
         userService.saveUser(user);
@@ -71,7 +76,7 @@ public class PasswordServiceImpl {
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode jsonNode = mapper.readTree(password);
                 String password1 = jsonNode.get("password").asText();
-                resetUser.setPassword(securityConfig.passwordEncoder().encode(password1));
+                resetUser.setPassword(passwordEncoder.encode(password1));
                 resetUser.setResetPasswordToken(null);
                 userService.saveUser(resetUser);
                 return new ResponseEntity<>(HttpStatus.OK);

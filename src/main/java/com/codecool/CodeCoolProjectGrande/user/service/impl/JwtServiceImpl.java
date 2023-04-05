@@ -1,5 +1,6 @@
-package com.codecool.CodeCoolProjectGrande.user.auth.jwt;
+package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
+import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 
-public class JwtUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+public class JwtServiceImpl implements JwtService {
+    private static final Logger logger = LoggerFactory.getLogger(JwtServiceImpl.class);
 
     @Value("${jwt.secret}")
     private String jwtSecret;

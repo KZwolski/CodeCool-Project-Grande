@@ -5,10 +5,9 @@ import com.codecool.CodeCoolProjectGrande.user.auth.LoginRequest;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Exception;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Response;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Utils;
-import com.codecool.CodeCoolProjectGrande.user.auth.jwt.JwtUtils;
+import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -23,19 +22,19 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class AuthenticationController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final UserService userService;
-    private final JwtUtils jwtUtils;
+    private final JwtService jwtService;
     private final static double SCORES_LEVEL = 0.7;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder encoder, UserService userService, JwtUtils jwtUtils) {
+    public AuthenticationController(UserRepository userRepository, PasswordEncoder encoder, UserService userService, JwtService jwtService) {
         this.userRepository = userRepository;
         this.encoder = encoder;
         this.userService = userService;
-        this.jwtUtils = jwtUtils;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
@@ -73,7 +72,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+        ResponseCookie cookie = jwtService.getCleanJwtCookie();
         System.out.println("wyczysciolo cookie ----------logout");
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body("You've been signed out!");

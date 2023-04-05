@@ -3,10 +3,10 @@ package com.codecool.CodeCoolProjectGrande.user.service.impl;
 import com.codecool.CodeCoolProjectGrande.user.User;
 import com.codecool.CodeCoolProjectGrande.user.UserType;
 import com.codecool.CodeCoolProjectGrande.user.auth.LoginRequest;
-import com.codecool.CodeCoolProjectGrande.user.config.EmailValidator;
+import com.codecool.CodeCoolProjectGrande.user.util.EmailValidator;
 import com.codecool.CodeCoolProjectGrande.user.config.UserDetailsImpl;
-import com.codecool.CodeCoolProjectGrande.user.auth.jwt.JwtUtils;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
+import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
-    private final JwtUtils jwtUtils;
+    private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, AuthenticationManager authenticationManager, JwtUtils jwtUtils, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, AuthenticationManager authenticationManager, JwtService jwtService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
-        this.jwtUtils = jwtUtils;
+        this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return jwtUtils.generateJwtCookie(userDetails);
+        return jwtService.generateJwtCookie(userDetails);
     }
 
 
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseCookie logoutUser() {
-        return jwtUtils.getCleanJwtCookie();
+        return jwtService.getCleanJwtCookie();
     }
 
 
