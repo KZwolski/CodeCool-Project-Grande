@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.config;
+package com.codecool.CodeCoolProjectGrande.user.security;
 
 import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserDetailsServiceImpl;

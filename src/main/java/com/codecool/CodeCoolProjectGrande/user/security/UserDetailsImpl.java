@@ -1,7 +1,7 @@
-package com.codecool.CodeCoolProjectGrande.user.config;
+package com.codecool.CodeCoolProjectGrande.user.security;
 
-import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.UserType;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

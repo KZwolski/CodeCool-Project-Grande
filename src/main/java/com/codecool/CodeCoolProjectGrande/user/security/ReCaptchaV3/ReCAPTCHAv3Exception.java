@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3;
+package com.codecool.CodeCoolProjectGrande.user.security.ReCaptchaV3;
 
 public class ReCAPTCHAv3Exception extends Throwable {
 

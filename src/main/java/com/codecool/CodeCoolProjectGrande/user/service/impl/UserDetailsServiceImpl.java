@@ -1,8 +1,8 @@
 package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
 
-import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.config.UserDetailsImpl;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.security.UserDetailsImpl;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

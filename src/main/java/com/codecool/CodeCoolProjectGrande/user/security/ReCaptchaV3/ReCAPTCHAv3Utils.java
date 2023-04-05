@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3;
+package com.codecool.CodeCoolProjectGrande.user.security.ReCaptchaV3;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import java.io.BufferedReader;

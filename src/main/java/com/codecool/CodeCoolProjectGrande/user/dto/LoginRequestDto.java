@@ -1,12 +1,12 @@
-package com.codecool.CodeCoolProjectGrande.user.auth;
+package com.codecool.CodeCoolProjectGrande.user.dto;
 
-public class LoginRequest {
+public class LoginRequestDto {
     private String username;
     private String password;
     private String email;
     private String token;
 
-    public LoginRequest(String username, String password, String email, String token) {
+    public LoginRequestDto(String username, String password, String email, String token) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -21,7 +21,7 @@ public class LoginRequest {
         this.token = token;
     }
 
-    public LoginRequest() {
+    public LoginRequestDto() {
     }
 
     public String getUsername() {

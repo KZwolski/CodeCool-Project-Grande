@@ -1,7 +1,7 @@
 package com.codecool.CodeCoolProjectGrande.user.service;
 
 import com.codecool.CodeCoolProjectGrande.user.SampleUserData;
-import com.codecool.CodeCoolProjectGrande.user.UserType;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;

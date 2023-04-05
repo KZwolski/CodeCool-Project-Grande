@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3;
+package com.codecool.CodeCoolProjectGrande.user.security.ReCaptchaV3;
 
 import lombok.Data;
 import org.codehaus.jackson.annotate.JsonProperty;

@@ -1,11 +1,11 @@
 package com.codecool.CodeCoolProjectGrande;
 
 
-import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.UserType;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
 import com.codecool.CodeCoolProjectGrande.user.controller.ResetPasswordController;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.ResetPasswordServiceImpl;
-import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;

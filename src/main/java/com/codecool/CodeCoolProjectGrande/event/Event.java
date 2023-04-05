@@ -1,6 +1,6 @@
 package com.codecool.CodeCoolProjectGrande.event;
 import com.codecool.CodeCoolProjectGrande.image.Image;
-import com.codecool.CodeCoolProjectGrande.user.User;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

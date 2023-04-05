@@ -1,5 +1,6 @@
 package com.codecool.CodeCoolProjectGrande.user.password_reset;
 
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
 import com.codecool.CodeCoolProjectGrande.user.util.EmailValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

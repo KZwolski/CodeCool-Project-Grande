@@ -1,6 +1,5 @@
-package com.codecool.CodeCoolProjectGrande.user;
+package com.codecool.CodeCoolProjectGrande.user.model;
 
-import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,10 +1,10 @@
 package com.codecool.CodeCoolProjectGrande.user.controller;
 
-import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.auth.LoginRequest;
-import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Exception;
-import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Response;
-import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Utils;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.dto.LoginRequestDto;
+import com.codecool.CodeCoolProjectGrande.user.security.ReCaptchaV3.ReCAPTCHAv3Exception;
+import com.codecool.CodeCoolProjectGrande.user.security.ReCaptchaV3.ReCAPTCHAv3Response;
+import com.codecool.CodeCoolProjectGrande.user.security.ReCaptchaV3.ReCAPTCHAv3Utils;
 import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
@@ -38,14 +38,14 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseCookie> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request) {
-        String token = loginRequest.getToken();
+    public ResponseEntity<ResponseCookie> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request) {
+        String token = loginRequestDto.getToken();
         String address = request.getRemoteAddr();
         try {
             ReCAPTCHAv3Response response = ReCAPTCHAv3Utils.request(token, address);
             if (response.isSuccess()) {
                 if (response.getScore() > SCORES_LEVEL) {
-                    return userService.loginUser(loginRequest);
+                    return userService.loginUser(loginRequestDto);
                 } else {
                     return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
                 }
@@ -60,11 +60,11 @@ public class AuthenticationController {
 
 
     @PostMapping("/login/oauth")
-    public ResponseEntity<ResponseCookie> authenticateOauthUser(@Valid @RequestBody LoginRequest loginRequest) {
-        if (!userRepository.findUserByEmail(loginRequest.getEmail()).isPresent()){
-            userRepository.save(new User(loginRequest.getUsername(), encoder.encode(loginRequest.getPassword()), loginRequest.getEmail()));
+    public ResponseEntity<ResponseCookie> authenticateOauthUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
+        if (!userRepository.findUserByEmail(loginRequestDto.getEmail()).isPresent()){
+            userRepository.save(new User(loginRequestDto.getUsername(), encoder.encode(loginRequestDto.getPassword()), loginRequestDto.getEmail()));
         }
-        ResponseCookie jwtCookie = userService.authenticateUser(loginRequest);
+        ResponseCookie jwtCookie = userService.authenticateUser(loginRequestDto);
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(jwtCookie);
     }

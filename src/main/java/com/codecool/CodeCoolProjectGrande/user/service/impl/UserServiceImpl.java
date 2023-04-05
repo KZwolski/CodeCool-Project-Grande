@@ -1,10 +1,10 @@
 package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
-import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.UserType;
-import com.codecool.CodeCoolProjectGrande.user.auth.LoginRequest;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
+import com.codecool.CodeCoolProjectGrande.user.dto.LoginRequestDto;
 import com.codecool.CodeCoolProjectGrande.user.util.EmailValidator;
-import com.codecool.CodeCoolProjectGrande.user.config.UserDetailsImpl;
+import com.codecool.CodeCoolProjectGrande.user.security.UserDetailsImpl;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
@@ -85,9 +85,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseCookie authenticateUser(LoginRequest loginRequest) {
+    public ResponseCookie authenticateUser(LoginRequestDto loginRequestDto) {
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         return jwtService.generateJwtCookie(userDetails);
@@ -95,8 +95,8 @@ public class UserServiceImpl implements UserService {
 
 
     @NotNull
-    public ResponseEntity<ResponseCookie> loginUser(LoginRequest loginRequest) {
-        ResponseCookie jwtCookie = authenticateUser(loginRequest);
+    public ResponseEntity<ResponseCookie> loginUser(LoginRequestDto loginRequestDto) {
+        ResponseCookie jwtCookie = authenticateUser(loginRequestDto);
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
                 .body(jwtCookie);
     }

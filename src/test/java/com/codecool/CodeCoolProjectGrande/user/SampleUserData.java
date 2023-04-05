@@ -1,6 +1,8 @@
 package com.codecool.CodeCoolProjectGrande.user;
 
-import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
 
 import java.util.UUID;
 

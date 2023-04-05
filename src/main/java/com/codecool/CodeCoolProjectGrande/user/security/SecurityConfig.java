@@ -1,9 +1,8 @@
-package com.codecool.CodeCoolProjectGrande.user.config;
+package com.codecool.CodeCoolProjectGrande.user.security;
 
 import com.codecool.CodeCoolProjectGrande.user.service.JwtService;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.JwtServiceImpl;
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserDetailsServiceImpl;
-import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

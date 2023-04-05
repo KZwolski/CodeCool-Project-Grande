@@ -1,6 +1,6 @@
 package com.codecool.CodeCoolProjectGrande.user.controller;
 
-import com.codecool.CodeCoolProjectGrande.user.User;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

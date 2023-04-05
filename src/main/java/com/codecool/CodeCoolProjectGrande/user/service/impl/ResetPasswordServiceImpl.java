@@ -1,8 +1,8 @@
 package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
-import com.codecool.CodeCoolProjectGrande.user.User;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
 import com.codecool.CodeCoolProjectGrande.user.controller.ResetPasswordController;
-import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
 import com.codecool.CodeCoolProjectGrande.user.service.ResetPasswordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
