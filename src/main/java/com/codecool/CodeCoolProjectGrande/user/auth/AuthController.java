@@ -4,7 +4,7 @@ import com.codecool.CodeCoolProjectGrande.user.User;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Exception;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Response;
 import com.codecool.CodeCoolProjectGrande.user.auth.ReCaptchaV3.ReCAPTCHAv3Utils;
-import com.codecool.CodeCoolProjectGrande.user.jwt.JwtUtils;
+import com.codecool.CodeCoolProjectGrande.user.auth.jwt.JwtUtils;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +45,7 @@ public class AuthController {
             ReCAPTCHAv3Response response = ReCAPTCHAv3Utils.request(token, address);
             if (response.isSuccess()) {
                 if (response.getScore() > SCORES_LEVEL) {
-                    return loginUser(loginRequest);
+                    return userService.loginUser(loginRequest);
                 } else {
                     return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
                 }
@@ -58,12 +58,6 @@ public class AuthController {
 
     }
 
-    @NotNull
-    private ResponseEntity<ResponseCookie> loginUser(LoginRequest loginRequest) {
-        ResponseCookie jwtCookie = userService.authenticateUser(loginRequest);
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(jwtCookie);
-    }
 
     @PostMapping("/login/oauth")
     public ResponseEntity<ResponseCookie> authenticateOauthUser(@Valid @RequestBody LoginRequest loginRequest) {

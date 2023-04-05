@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.jwt;
+package com.codecool.CodeCoolProjectGrande.user.auth.jwt;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

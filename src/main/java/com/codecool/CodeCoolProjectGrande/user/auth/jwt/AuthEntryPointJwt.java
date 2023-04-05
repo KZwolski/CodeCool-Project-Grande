@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.jwt;
+package com.codecool.CodeCoolProjectGrande.user.auth.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

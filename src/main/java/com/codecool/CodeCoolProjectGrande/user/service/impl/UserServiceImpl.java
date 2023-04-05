@@ -4,14 +4,16 @@ import com.codecool.CodeCoolProjectGrande.user.User;
 import com.codecool.CodeCoolProjectGrande.user.UserType;
 import com.codecool.CodeCoolProjectGrande.user.auth.LoginRequest;
 import com.codecool.CodeCoolProjectGrande.user.config.EmailValidator;
-import com.codecool.CodeCoolProjectGrande.user.config.SecurityConfig;
 import com.codecool.CodeCoolProjectGrande.user.config.UserDetailsImpl;
-import com.codecool.CodeCoolProjectGrande.user.jwt.JwtUtils;
+import com.codecool.CodeCoolProjectGrande.user.auth.jwt.JwtUtils;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import com.codecool.CodeCoolProjectGrande.user.service.UserService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -90,6 +92,15 @@ public class UserServiceImpl implements UserService {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         return jwtUtils.generateJwtCookie(userDetails);
     }
+
+
+    @NotNull
+    public ResponseEntity<ResponseCookie> loginUser(LoginRequest loginRequest) {
+        ResponseCookie jwtCookie = authenticateUser(loginRequest);
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .body(jwtCookie);
+    }
+
 
     @Override
     public ResponseCookie logoutUser() {

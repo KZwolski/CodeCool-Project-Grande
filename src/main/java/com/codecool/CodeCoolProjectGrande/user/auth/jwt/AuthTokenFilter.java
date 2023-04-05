@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.jwt;
+package com.codecool.CodeCoolProjectGrande.user.auth.jwt;
 
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
