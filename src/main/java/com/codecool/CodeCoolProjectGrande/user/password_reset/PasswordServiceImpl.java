@@ -1,9 +1,8 @@
 package com.codecool.CodeCoolProjectGrande.user.password_reset;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.configuration.SecurityConfig;
-import com.codecool.CodeCoolProjectGrande.user.service.UserServiceImpl;
-import org.jetbrains.annotations.NotNull;
+import com.codecool.CodeCoolProjectGrande.user.config.SecurityConfig;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

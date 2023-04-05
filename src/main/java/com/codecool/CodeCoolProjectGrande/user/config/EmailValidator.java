@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.configuration;
+package com.codecool.CodeCoolProjectGrande.user.config;
 
 import java.util.regex.Pattern;
 

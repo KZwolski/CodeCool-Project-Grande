@@ -2,7 +2,7 @@ package com.codecool.CodeCoolProjectGrande.user.controller;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
 
-import com.codecool.CodeCoolProjectGrande.user.service.UserServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

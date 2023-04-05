@@ -2,7 +2,7 @@ package com.codecool.CodeCoolProjectGrande.user.password_reset;
 
 import com.codecool.CodeCoolProjectGrande.user.SampleUserData;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
-import com.codecool.CodeCoolProjectGrande.user.service.UserServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest

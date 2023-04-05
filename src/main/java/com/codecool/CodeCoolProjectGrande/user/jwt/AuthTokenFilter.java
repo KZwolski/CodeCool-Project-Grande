@@ -1,6 +1,6 @@
 package com.codecool.CodeCoolProjectGrande.user.jwt;
 
-import com.codecool.CodeCoolProjectGrande.user.repository.UserDetailsServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

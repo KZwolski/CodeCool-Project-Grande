@@ -7,7 +7,7 @@ import com.codecool.CodeCoolProjectGrande.user.password_reset.PasswordController
 import com.codecool.CodeCoolProjectGrande.user.password_reset.PasswordServiceImpl;
 import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
-import com.codecool.CodeCoolProjectGrande.user.service.UserServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

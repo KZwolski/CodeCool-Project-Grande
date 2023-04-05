@@ -1,4 +1,4 @@
-package com.codecool.CodeCoolProjectGrande.user.repository;
+package com.codecool.CodeCoolProjectGrande.user.config;
 
 import com.codecool.CodeCoolProjectGrande.user.User;
 import com.codecool.CodeCoolProjectGrande.user.UserType;
