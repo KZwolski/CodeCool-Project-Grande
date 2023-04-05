@@ -42,12 +42,4 @@ public class User {
         this.email = email;
         this.userType = UserType.USER;
     }
-
-    //    @JsonIgnore
-//    @ManyToMany(mappedBy = "assignedUsers", fetch = FetchType.EAGER)
-//    private Set<Event> events = new HashSet<>();
-
-//    public void addEvent(Event event) {
-//        events.add(event);
-//    }
 }
