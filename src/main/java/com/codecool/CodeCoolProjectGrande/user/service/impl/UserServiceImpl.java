@@ -1,5 +1,7 @@
 package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
+import com.codecool.CodeCoolProjectGrande.user.dto.UserDto;
+import com.codecool.CodeCoolProjectGrande.user.mapper.UserMapper;
 import com.codecool.CodeCoolProjectGrande.user.model.User;
 import com.codecool.CodeCoolProjectGrande.user.model.UserType;
 import com.codecool.CodeCoolProjectGrande.user.dto.LoginRequestDto;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -47,25 +50,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
+    public Optional<UserDto> getUserByEmail(String email) {
+        Optional<User> userEntity = userRepository.findUserByEmail(email);
+        return userEntity.map(UserMapper::mapUserToDto);
+
     }
 
     @Override
-    public Optional<User> getUserByToken(UUID token) {
-        return userRepository.findUserByResetPasswordTokenTokenId(token);
+    public Optional<UserDto> getUserByToken(UUID token) {
+        Optional<User> userEntity = userRepository.findUserByResetPasswordTokenTokenId(token);
+        return userEntity.map(UserMapper::mapUserToDto);
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getUsers() {
+        List<User> userEntities = userRepository.findAll();
+        return userEntities.stream().map(UserMapper::mapUserToDto).collect(Collectors.toList());
     }
 
     @Override
     @Modifying
-    public Optional<User> saveUser(User user) {
+    public UserDto saveUser(User user) {
         userRepository.save(user);
-        return Optional.of(user);
+        return UserMapper.mapUserToDto(user);
     }
 
     @Override
@@ -77,11 +84,11 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<User> createUser(User user){
+    public Optional<UserDto> createUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserType(UserType.USER);
         userRepository.save(user);
-        return Optional.of(user);
+        return Optional.of(UserMapper.mapUserToDto(user));
     }
 
     @Override

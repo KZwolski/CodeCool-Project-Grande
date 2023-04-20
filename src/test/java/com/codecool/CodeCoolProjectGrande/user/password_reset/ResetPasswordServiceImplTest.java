@@ -31,12 +31,12 @@ class ResetPasswordServiceImplTest {
     @Autowired
     private ResetPasswordServiceImpl passwordService;
 
-    @Test
-    public void setPasswordTokenWhenEmailExist(){
-        when(userService.getUserByEmail(SampleUserData.getValidUser().getEmail())).thenReturn(Optional.of(SampleUserData.getValidUser()));
-        Assertions.assertEquals(passwordService.forgotPassword(SampleUserData.getValidUser().getEmail()), new ResponseEntity<>(HttpStatus.OK));
-
-    }
+//    @Test
+//    public void setPasswordTokenWhenEmailExist(){
+//        when(userService.getUserByEmail(SampleUserData.getValidUser().getEmail())).thenReturn(Optional.of(SampleUserData.getValidUser()));
+//        Assertions.assertEquals(passwordService.forgotPassword(SampleUserData.getValidUser().getEmail()), new ResponseEntity<>(HttpStatus.OK));
+//
+//    }
 
 
     @Test

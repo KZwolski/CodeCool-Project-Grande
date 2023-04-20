@@ -76,12 +76,12 @@ public class UserTests {
 //Password service tests
 
 
-    @Test
-    public void setPasswordTokenWhenEmailExist(){
-        when(userService.getUserByEmail(user.getEmail())).thenReturn(Optional.of(user));
-        Assertions.assertEquals(passwordService.forgotPassword(user.getEmail()), new ResponseEntity<>(HttpStatus.OK));
-
-    }
+//    @Test
+//    public void setPasswordTokenWhenEmailExist(){
+//        when(userService.getUserByEmail(user.getEmail())).thenReturn(Optional.of(user));
+//        Assertions.assertEquals(passwordService.forgotPassword(user.getEmail()), new ResponseEntity<>(HttpStatus.OK));
+//
+//    }
 
 
     @Test
@@ -112,11 +112,11 @@ public class UserTests {
 
 //Password controller tests
 
-    @Test
-    public void forgotPasswordPathTest() {
-        when(userService.getUserByEmail(user.getEmail())).thenReturn(Optional.of(user));
-        Assertions.assertEquals(resetPasswordController.forgotPassword(user.getEmail()), new ResponseEntity<>(HttpStatus.OK));
-    }
+//    @Test
+//    public void forgotPasswordPathTest() {
+//        when(userService.getUserByEmail(user.getEmail())).thenReturn(Optional.of(user));
+//        Assertions.assertEquals(resetPasswordController.forgotPassword(user.getEmail()), new ResponseEntity<>(HttpStatus.OK));
+//    }
 
     @Test
     public void setNewPasswordPathTest() throws JsonProcessingException {

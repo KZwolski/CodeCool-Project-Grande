@@ -1,5 +1,7 @@
 package com.codecool.CodeCoolProjectGrande.user.service.impl;
 
+import com.codecool.CodeCoolProjectGrande.user.dto.UserDto;
+import com.codecool.CodeCoolProjectGrande.user.mapper.UserMapper;
 import com.codecool.CodeCoolProjectGrande.user.model.User;
 import com.codecool.CodeCoolProjectGrande.user.controller.ResetPasswordController;
 import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
@@ -40,7 +42,7 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
     }
 
     public ResponseEntity<?> forgotPassword(String userEmail) {
-        Optional<User> user = userService.getUserByEmail(userEmail.replaceAll("\"", ""));
+        Optional<UserDto> user = userService.getUserByEmail(userEmail.replaceAll("\"", ""));
         if (user.isPresent()) {
             ResetPasswordToken token = setResetPasswordToken(user.get());
             sendResetPasswordEmail(user.get(), token);
@@ -49,7 +51,7 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public void sendResetPasswordEmail(User user, ResetPasswordToken token) {
+    public void sendResetPasswordEmail(UserDto user, ResetPasswordToken token) {
         SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
         String appUrl = "http://localhost:3000";
         passwordResetEmail.setFrom("support@demo.com");
@@ -60,25 +62,25 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
         sendEmail(passwordResetEmail);
     }
 
-    public ResetPasswordToken setResetPasswordToken(User user) {
+    public ResetPasswordToken setResetPasswordToken(UserDto user) {
         ResetPasswordToken token = new ResetPasswordToken();
         user.setResetPasswordToken(token);
-        userService.saveUser(user);
+        userService.saveUser(UserMapper.mapUserToEntity(user));
         return token;
     }
 
 
     public ResponseEntity<?> setNewPassword(UUID token, String password) throws JsonProcessingException{
-        Optional<User> user = userService.getUserByToken(token);
+        Optional<UserDto> user = userService.getUserByToken(token);
         if (user.isPresent()) {
-            User resetUser = user.get();
+            UserDto resetUser = user.get();
             if (!resetUser.getResetPasswordToken().isExpired()) {
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode jsonNode = mapper.readTree(password);
                 String password1 = jsonNode.get("password").asText();
                 resetUser.setPassword(passwordEncoder.encode(password1));
                 resetUser.setResetPasswordToken(null);
-                userService.saveUser(resetUser);
+                userService.saveUser(UserMapper.mapUserToEntity(resetUser));
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 resetUser.setResetPasswordToken(null);

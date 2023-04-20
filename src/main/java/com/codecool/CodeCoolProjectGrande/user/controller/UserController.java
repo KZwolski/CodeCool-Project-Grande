@@ -1,5 +1,6 @@
 package com.codecool.CodeCoolProjectGrande.user.controller;
 
+import com.codecool.CodeCoolProjectGrande.user.dto.UserDto;
 import com.codecool.CodeCoolProjectGrande.user.model.User;
 
 import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
@@ -25,12 +26,12 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getUsers(){
+    public List<UserDto> getUsers(){
         return userService.getUsers();
     }
 
     @GetMapping("/user/{userEmail}")
-    public Optional<User> getUserByEmail(@PathVariable String userEmail) {
+    public Optional<UserDto> getUserByEmail(@PathVariable String userEmail) {
         return userService.getUserByEmail(userEmail);
     }
 
