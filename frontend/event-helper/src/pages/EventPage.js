@@ -210,6 +210,7 @@ export default function EventPage() {
                             </div>
                             {/*<ChatRoom eventId={event.eventId}/>*/}
                         </div>
+                        <br></br>
                         {isLoggedIn?
                             <EventChat eventId={event.eventId}/>
                             :<p>You must be logged In to join chat</p>}

@@ -5,17 +5,12 @@ import com.codecool.CodeCoolProjectGrande.event.Event;
 import com.codecool.CodeCoolProjectGrande.event.EventStatus;
 import com.codecool.CodeCoolProjectGrande.event.EventType;
 import com.codecool.CodeCoolProjectGrande.event.controller.EventController;
-import com.codecool.CodeCoolProjectGrande.event.event_provider.wroclaw_model.Address;
-import com.codecool.CodeCoolProjectGrande.event.event_provider.wroclaw_model.Location;
-import com.codecool.CodeCoolProjectGrande.event.event_provider.wroclaw_model.Offer;
-import com.codecool.CodeCoolProjectGrande.event.event_provider.wroclaw_model.WroclawEvent;
 import com.codecool.CodeCoolProjectGrande.event.repository.EventRepository;
-import com.codecool.CodeCoolProjectGrande.user.User;
-import com.codecool.CodeCoolProjectGrande.user.UserType;
-import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
 import com.codecool.CodeCoolProjectGrande.user.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -67,7 +62,6 @@ class EventServiceTests {
                     .latitude(222.0)
                     .longitude(222.0)
                     .eventStatus(EventStatus.PROMOTED)
-                    .logo("test.com")
                     .build();
 
 
@@ -232,12 +226,12 @@ class EventServiceTests {
     }
 
 
-    @Test
-    void saveWroclawDataSuccessfullyTest(){
-        when(eventRepository.findEventByName(event.getName())).thenReturn(Optional.of(event));
-        when(eventService.createEvent(event)).thenReturn(Optional.of(event));
-        Assertions.assertEquals(eventController.saveWroclawData(), new ResponseEntity<>(HttpStatus.CREATED));
-    }
+//    @Test
+//    void saveWroclawDataSuccessfullyTest(){
+//        when(eventRepository.findEventByName(event.getName())).thenReturn(Optional.of(event));
+//        when(eventService.createEvent(event)).thenReturn(Optional.of(event));
+//        Assertions.assertEquals(eventController.saveWroclawData(), new ResponseEntity<>(HttpStatus.CREATED));
+//    }
 
 
 

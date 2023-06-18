@@ -1,6 +1,7 @@
 package com.codecool.CodeCoolProjectGrande.user.password_reset;
 
-import com.codecool.CodeCoolProjectGrande.user.configuration.EmailValidator;
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.util.EmailValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,8 +10,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ResetPasswordTokenTest {

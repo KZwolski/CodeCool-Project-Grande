@@ -1,6 +1,8 @@
 package com.codecool.CodeCoolProjectGrande.user;
 
-import com.codecool.CodeCoolProjectGrande.user.password_reset.ResetPasswordToken;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
+import com.codecool.CodeCoolProjectGrande.user.model.UserType;
+import com.codecool.CodeCoolProjectGrande.user.model.ResetPasswordToken;
 
 import java.util.UUID;
 
@@ -14,7 +16,6 @@ public class SampleUserData {
                 .email("maciek22@gmail.com")
                 .password("Maciek231")
                 .userType(UserType.USER)
-                .banToken(initBanToken())
                 .location("Warsaw")
                 .resetPasswordToken(new ResetPasswordToken())
                 .build();
@@ -27,17 +28,9 @@ public class SampleUserData {
                 .email("tomek34@x")
                 .password("tomek")
                 .userType(UserType.USER)
-                .banToken(initBanToken())
                 .location("Krakow")
                 .resetPasswordToken(new ResetPasswordToken())
                 .build();
-    }
-
-    public static BanToken initBanToken(){
-        BanToken banToken = new BanToken();
-        banToken.setBanId(UUID.randomUUID());
-        banToken.setBanDays(5);
-        return banToken;
     }
 
 }

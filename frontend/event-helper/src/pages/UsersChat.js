@@ -193,12 +193,12 @@ const UsersChat = () => {
                         <ul>
                             <li onClick={() => {
                                 setTab("CHATROOM")
-                            }} className={`member ${tab === "CHATROOM" && "active"}`}>All Chat
+                            }} className={`member ${tab === "CHATROOM" && "active"}`}>Global
                             </li>
                             {[...privateChats.keys()].map((name, index) => (
                                 <li onClick={() => {
                                     setTab(name)
-                                }} className={`member ${tab === name && "active"}`} key={index}>{name}</li>
+                                }} className={`member ${tab === name && "active"}`} key={index}>{name.substring(0, name.indexOf("@"))}</li>
                             ))}
                         </ul>
                     </div>
@@ -208,7 +208,7 @@ const UsersChat = () => {
                                 <li className={`message ${chat.senderName === userData.username && "self"}`}
                                     key={index}>
                                     {chat.senderName !== userData.username &&
-                                        <div className="avatar">{chat.senderName}</div>}
+                                        <div className="avatar">{chat.senderName.substring(0, chat.senderName.indexOf("@"))}</div>}
                                     <div className="message-data">{chat.message}</div>
                                     {chat.senderName === userData.username &&
                                         <div className="avatar self">{chat.senderName}</div>}
@@ -243,13 +243,14 @@ const UsersChat = () => {
                         </div>
                     </div>
                     }
+                    <br></br>
                     <button type="button" onClick={userLeave} className="send-button leave">
-                        leave
+                        Leave
                     </button>
                 </div>
 
-                : <button type="button" onClick={registerUser} className="send-button">
-                    Join Chat
+                : <button type="button" onClick={registerUser} className="information active">
+                    <h3>Join Chat</h3>
                 </button>}
         </div>
     )

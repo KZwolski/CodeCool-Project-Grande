@@ -1,8 +1,9 @@
 package com.codecool.CodeCoolProjectGrande.user.controller;
 
-import com.codecool.CodeCoolProjectGrande.user.User;
+import com.codecool.CodeCoolProjectGrande.user.dto.UserDto;
+import com.codecool.CodeCoolProjectGrande.user.model.User;
 
-import com.codecool.CodeCoolProjectGrande.user.service.UserServiceImpl;
+import com.codecool.CodeCoolProjectGrande.user.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Controller
 @ResponseBody
 @CrossOrigin
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class UserController {
     private final UserServiceImpl userService;
 
@@ -24,24 +25,33 @@ public class UserController {
         this.userService = userService;
     }
 
-    @CrossOrigin
-    @GetMapping("users")
-    public List<User> getUsers(){
+    @GetMapping("/users")
+    public List<UserDto> getUsers(){
         return userService.getUsers();
     }
 
-    @GetMapping("user/{userEmail}")
-    public Optional<User> getUserByEmail(@PathVariable String userEmail) {
+    @GetMapping("/user/{userEmail}")
+    public Optional<UserDto> getUserByEmail(@PathVariable String userEmail) {
         return userService.getUserByEmail(userEmail);
     }
 
-    @PostMapping("user")
+    @PostMapping("/user")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>("User added", HttpStatus.OK);
     }
 
-    @DeleteMapping("delete-account/{userEmail}")
+    @PostMapping("/registration")
+    public ResponseEntity<?> registerAccount(@RequestBody User user){
+        if (userService.isUserDataValid(user)){
+            userService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+
+    @DeleteMapping("/delete-account/{userEmail}")
     public void deleteUser(@PathVariable String userEmail) {
         userService.deleteUser(userEmail);
     }
